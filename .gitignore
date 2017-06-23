@@ -1,0 +1,6 @@
+venv
+*.pyc
+staticfiles
+.env
+test.py
+database.db

@@ -1,0 +1,5 @@
+discord.py
+psycopg2
+PyNaCl
+iron_cache
+requests
