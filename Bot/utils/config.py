@@ -38,7 +38,6 @@ class Database:
 
         self.cur = self.conn.cursor()
         self.gen_tables()
-        self.validate_tables()
 
     def reinit(self):
         self.conn.commit()
@@ -47,37 +46,18 @@ class Database:
 
     def gen_tables(self) -> None:
         """Generates the necessary tables if they do not exist"""
-        self.cur.execute("CREATE TABLE IF NOT EXISTS SETTINGS(id SERIAL, prefix TEXT, currency_name TEXT, "
-                         " currency_plrname TEXT, currency_sign TEXT, owner TEXT)")
-        self.cur.execute("CREATE TABLE IF NOT EXISTS CURRENCY(id SERIAL,"
-                         " username TEXT, userid BIGINT NOT NULL, amount INTEGER NOT NULL CHECK (amount >= 0))")
+        self.cur.execute("CREATE TABLE IF NOT EXISTS \"settings\" (\"id\" serial NOT NULL PRIMARY KEY, "
+                         "\"prefix\" varchar(20), "
+                         "\"currency_name\" varchar(50), "
+                         "\"currency_plrname\" varchar(50), "
+                         "\"currency_sign\" varchar(50), "
+                         "\"owner\" varchar(100))")
+
+        self.cur.execute("CREATE TABLE IF NOT EXISTS \"currency\" (\"id\" serial NOT NULL PRIMARY KEY, "
+                         "\"username\" varchar(100) NULL, "
+                         "\"userid\" bigint NOT NULL, "
+                         "\"amount\" integer NOT NULL CHECK (amount >= 0))")
         self.conn.commit()
-
-    def validate_tables(self) -> None:
-        """Validates if the columns and data types are true, currently only works with postgres database"""
-        # TODO add support for sqlite3 in the validate_tables function
-        if self._type == 'postgres':
-            gen = False
-
-            self.cur.execute("SELECT column_name, data_type FROM information_schema.columns "
-                             "WHERE table_name='settings'")
-
-            if self.cur.fetchall() != [('id', 'integer'), ('prefix', 'text'), ('currency_name', 'text'),
-                                       ('currency_plrname', 'text'), ('currency_sign', 'text'), ('owner', 'text')]:
-                self.cur.execute("DROP TABLE settings")
-                logger.error("Table settings does not match required format, dropping settings")
-                gen = True
-
-            self.cur.execute("SELECT column_name, data_type FROM information_schema.columns "
-                             "WHERE table_name='currency'")
-
-            if self.cur.fetchall() != [('id', 'integer'), ('username', 'text'),
-                                       ('userid', 'bigint'), ('amount', 'integer')]:
-                self.cur.execute("DROP TABLE currency")
-                logger.error("Table currency does not match required format, dropping settings")
-                gen = True
-            if gen:
-                self.gen_tables()
 
     def retrieve_data(self, table: str, **kwargs) -> cursor:
         row = kwargs.pop('row', None)
