@@ -1,6 +1,6 @@
 import logging
 from .config import Database
-from psycopg2 import IntegrityError
+from psycopg2 import IntegrityError, InternalError
 from typing import Union
 import discord
 
@@ -26,7 +26,12 @@ class Base:
         logger.info(f"Updated currency for user {userid} {username}, operation {operation}, amount {amount}")
 
         # check if the userid exists, if not, create a user with 0 amount
-        cur = self._database.retrieve_data(table='currency', row_id='userid', row=userid, column='id')
+        try:
+            cur = self._database.retrieve_data(table='currency', row_id='userid', row=userid, column='id')
+        except InternalError:
+            self._database.reinit()
+            cur = self._database.retrieve_data(table='currency', row_id='userid', row=userid, column='id')
+
         if not cur.fetchone():
             self._database.write_data("INSERT INTO currency (username, userid, amount) VALUES (?, ?, 0)",
                                       (username, userid))
@@ -35,5 +40,6 @@ class Base:
         try:
             self._database.write_data(f"UPDATE currency SET amount=amount{operation}{amount} WHERE userid=?", (userid,))
         except IntegrityError:
+            self._database.reinit()
             return False
         return amount

@@ -40,6 +40,11 @@ class Database:
         self.gen_tables()
         self.validate_tables()
 
+    def reinit(self):
+        self.conn.commit()
+        self.cur.close()
+        self.cur = self.conn.cursor()
+
     def gen_tables(self) -> None:
         """Generates the necessary tables if they do not exist"""
         self.cur.execute("CREATE TABLE IF NOT EXISTS SETTINGS(id SERIAL, prefix TEXT, currency_name TEXT, "
