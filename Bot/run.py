@@ -1,18 +1,16 @@
-import traceback
+import asyncio
 import logging
 import os
 import random
-import sys
-import asyncio
 import signal
+import sys
+import traceback
 
 import discord
 from discord.ext import commands
 
-from .utils.config import Database
-
 from . import Plugins
-
+from .utils.config import Database
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
