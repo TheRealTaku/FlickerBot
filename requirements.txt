@@ -6,3 +6,4 @@ requests
 django
 dj_database_url
 gunicorn
+whitenoise
