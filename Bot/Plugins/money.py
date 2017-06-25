@@ -37,6 +37,9 @@ class Currency(Base):
         result = self._manage(int(user.id), amount, operation='-', username=user.name)
         return result
 
+    def get_cur(self, amount):
+        return self.cur_name if amount <= 1 else self.cur_plrname
+
     # @owner_only(db=database)
     @commands.command(pass_context=True)
     async def add(self, ctx: commands.Context, amount: int):
