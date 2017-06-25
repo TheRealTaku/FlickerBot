@@ -3,6 +3,3 @@ psycopg2
 PyNaCl
 iron_cache
 requests
-django
-dj_database_url
-gunicorn
