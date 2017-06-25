@@ -1,2 +1,2 @@
 worker: python start.py
-web: cd Bot/web && gunicorn web.wsgi --log-file -
+web: gunicorn Bot.web.web.wsgi --log-file -
