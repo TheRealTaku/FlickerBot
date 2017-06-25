@@ -22,7 +22,7 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
-    os.path.join(PROJECT_ROOT, 'staticfiles'),
+    os.path.join(PROJECT_ROOT, 'static'),
 )
 
 # Quick-start development settings - unsuitable for production
@@ -34,7 +34,7 @@ SECRET_KEY = '^7z2u73iim@y)b_-p44z-8-zl!)&6ya)k344m*ek3)cl@$3s5g'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['flickerbot.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['flickerbot.herokuapp.com', ]
 
 # Application definition
 
