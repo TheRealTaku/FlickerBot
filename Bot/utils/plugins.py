@@ -15,6 +15,9 @@ class Base:
         self.cur_name = database.retrieve_data('settings', column='currency_name', row=1).fetchone()[0]
         self.cur_plrname = database.retrieve_data('settings', column='currency_plrname', row=1).fetchone()[0]
 
+    def get_cur(self, amount):
+        return self.cur_name if amount <= 1 else self.cur_plrname
+
     def balance(self, user: discord.User) -> int:
         self._manage(user.id, amount=0, operation='+')
         return self._database.retrieve_data(table='currency', row_id='userid',
