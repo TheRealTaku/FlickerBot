@@ -74,7 +74,7 @@ class Database:
             if self.cur.fetchall() != [('id', 'integer'), ('username', 'text'),
                                        ('userid', 'bigint'), ('amount', 'integer')]:
                 self.cur.execute("DROP TABLE currency")
-                logger.error("Table currency does not match required format, dropping settings")
+                logger.error("Table currency does not match required format, dropping currency")
                 gen = True
             if gen:
                 self.gen_tables()
