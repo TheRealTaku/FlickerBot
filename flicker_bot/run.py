@@ -9,7 +9,7 @@ import traceback
 import discord
 from discord.ext import commands
 
-from . import Plugins
+from . import plugins
 from .utils.config import Database
 
 logger = logging.getLogger()
@@ -78,8 +78,8 @@ async def on_message(message: discord.Message) -> None:
 
 
 def main() -> None:
-    logger.info('Starting up bot')
-    Plugins.load_plugins(client, db=database)
+    logger.info('Starting up flicker_bot')
+    plugins.load_plugins(client, db=database)
 
     loop = asyncio.get_event_loop()
 

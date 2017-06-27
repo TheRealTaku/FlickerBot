@@ -10,7 +10,7 @@ def load_plugins(client, db: Database = None) -> None:
     for plugin in ENABLED_PLUGINS:
         logger.info(f"Adding plugin: {plugin}")
         try:
-            plugin = import_module(f".{plugin}", 'Bot.Plugins')
+            plugin = import_module(f".{plugin}", 'flicker_bot.plugins')
             plugin.run(client, db=db)
         except ModuleNotFoundError:
             logging.error(f"Plugin {plugin} not found")

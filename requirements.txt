@@ -1,5 +1,10 @@
 discord.py
 psycopg2
-PyNaCl
 iron_cache
 requests
+flask
+flask-admin
+flask-security
+flask-sqlalchemy
+sqlalchemy
+gunicorn
