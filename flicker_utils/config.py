@@ -1,7 +1,8 @@
 import logging
 import sqlalchemy
 from sqlalchemy.orm import sessionmaker
-from flicker_utils import sql_app
+from . import sql_app
+
 logger = logging.getLogger()
 
 

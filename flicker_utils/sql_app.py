@@ -1,7 +1,5 @@
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, String, Integer, BigInteger, Sequence, CheckConstraint
-from typing import Iterable
-import pickle
 
 Base = declarative_base()
 
@@ -14,14 +12,6 @@ class Setting(Base):
     currency_plrname = Column(String)
     currency_sign = Column(String)
     owner = Column(String)
-
-    @property
-    def owners(self):
-        return pickle.loads(self.owner)
-
-    @owners.setter
-    def owners(self, value: Iterable):
-        self.owner = pickle.dumps(list(value))
 
 
 class Currency(Base):

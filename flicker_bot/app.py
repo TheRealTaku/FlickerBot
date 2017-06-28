@@ -52,7 +52,7 @@ async def on_ready() -> None:
     logger.info('Logged in as %s, id: %s', UserName, UserID)
 
 
-# @client.event
+@client.event
 async def on_command_error(err: Exception, ctx: commands.Context) -> None:
     if hasattr(err, 'original'):
         logging.error(traceback.print_tb(err.original.__traceback__))

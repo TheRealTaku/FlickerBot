@@ -30,7 +30,7 @@ class Games(Base):
         self.trans_deck = {card: (i % 13 if 0 < i % 13 <= 10 else 10) for i, card in enumerate(self.deck, start=1)}
         self.cache = iron_cache.IronCache(name=str(random()))
 
-    # TODO varlify all async functions are awaited
+    # TODO verify all async functions are awaited
     # TODO add doc strings to all functions
 
     async def start_blackjack(self) -> tuple:

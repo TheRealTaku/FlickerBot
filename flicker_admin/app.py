@@ -18,4 +18,3 @@ def setup_admin(Base, *models):
     admin = Admin(app, name='flicker_admin', template_mode='bootstrap3', url='/')
     for model in models:
         admin.add_view(ModelView(model, db.session))
-
