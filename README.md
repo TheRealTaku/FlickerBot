@@ -13,4 +13,5 @@ A personal discord bot running on discord.py framework, using Heroku and Flask.
     * `DATABASE_URL`: The url to the Postgresql or any SQL database, if you don't have any, you type a local file address to create a sqlite database. It's automatically defined if you used Heroku Postgresql.
     * `IRON_CACHE_PROJECT_ID`: *Soon to be optional*, comes with when used Iron Cache as a Heroku add-on.
     * `IRON_CACHE_TOKEN`: *Soon to be optional*, comes with when used Iron Cache as a Heroku add-on.
- 5. 
+ 5. To start the bot using heroku, in the command lines: `cd project_dir`, type `heroku create`, login to your heroku account, `git add .`, `git commit -m "initial commit"`, `git push heroku master`. See their documentation for more details.
+ 6. To start the flicker bot locally, type `python start.py` in the command lines.
