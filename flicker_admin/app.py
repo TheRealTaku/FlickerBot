@@ -7,7 +7,7 @@ import os
 app = Flask(__name__)
 
 
-def run_admin(Base, *models, debug=False):
+def setup_admin(Base, *models):
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
     app.config['SECRET_KEY'] = os.environ['SECRET_KEY']
@@ -19,4 +19,3 @@ def run_admin(Base, *models, debug=False):
     for model in models:
         admin.add_view(ModelView(model, db.session))
 
-    app.run(debug=debug)
